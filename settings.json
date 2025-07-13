@@ -1,0 +1,16 @@
+{
+  "version": "1.0.0",
+  "botName": "Titan-Botz",
+  "prefix": "/",
+  "adminIDs": [
+    "",
+    ""
+  ],
+  "ownerID": "",
+  "welcomeMessage": "Hello! I am FbBot. Type !help to see my commands.",
+  "allowedGroups": [
+    "",
+    ""
+  ],
+  "language": "en"
+}
