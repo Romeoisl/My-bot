@@ -1,16 +1,16 @@
 {
-  "version": "1.0.0",
-  "botName": "Titan-Botz",
+  "botName": "Titan-botz",
   "prefix": "/",
   "adminIDs": [
     "",
     ""
   ],
   "ownerID": "",
-  "welcomeMessage": "Hello! I am FbBot. Type !help to see my commands.",
+  "welcomeMessage": "Hello! I am Titan-botz. Type /help to see my commands.",
   "allowedGroups": [
     "",
     ""
   ],
-  "language": "en"
+  "language": "en",
+  "restartIntervalMinutes": 60
 }
