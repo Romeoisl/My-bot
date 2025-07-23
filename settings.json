@@ -12,5 +12,11 @@
     ""
   ],
   "language": "en",
-  "restartIntervalMinutes": 60
+  "restartIntervalMinutes": 60,
+  "fca-options": {
+    "online": true,
+    "updatePresence": true,
+    "selfListen": false,
+    "randomUserAgent": false
+  }
 }
