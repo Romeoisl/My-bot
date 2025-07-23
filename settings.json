@@ -1,16 +1,10 @@
 {
   "botName": "Titan-botz",
   "prefix": "/",
-  "adminIDs": [
-    "",
-    ""
-  ],
-  "ownerID": "",
+  "adminIDs": [],
+  "ownerID": "", 
   "welcomeMessage": "Hello! I am Titan-botz. Type /help to see my commands.",
-  "allowedGroups": [
-    "",
-    ""
-  ],
+  "allowedGroups": [],
   "language": "en",
   "restartIntervalMinutes": 60,
   "fcaOptions": {
