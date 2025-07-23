@@ -4,11 +4,11 @@
   "description": "A modular Facebook Messenger bot with admin, coins, auto-restart, and multilingual support.",
   "main": "index.js",
   "scripts": {
-    "start": "node restart.js"
+    "start": "node index.js"
   },
   "dependencies": {
     "ws3-fca": "^3.4.2",
-    "lowdb": "^6.0.1",
+    "lowdb": "^2.0.0",
     "figlet": "^1.7.0"
   },
   "author": "Team Titan",
