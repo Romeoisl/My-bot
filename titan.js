@@ -74,7 +74,12 @@ for (const file of eventFiles) {
 console.log('Total events loaded:', events.size);
 
 // === Facebook Login ===
-login({ appState: JSON.parse(fs.readFileSync('appstate.json', 'utf8')) }, (err, api) => {
+login({ appState: JSON.parse(fs.readFileSync('appstate.json', 'utf8')) }, {
+  online: settings.fcaOptions.online,
+  updatePresence: settings.fcaOptions.updatePresence,
+  selfListen: settings.fcaOptions.selfListen,
+  randomUserAgent: false
+}, (err, api) => {
   if (err) return console.error(err);
 
   // Print bot info when logged in
