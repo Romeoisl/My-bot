@@ -1,11 +1,13 @@
 const login = require('ws3-fca');
 const fs = require('fs');
 const path = require('path');
+const figlet = require("figlet");
 const { Low, JSONFile } = require('lowdb');
 
 // === Load Settings ===
 const settings = JSON.parse(fs.readFileSync('settings.json', 'utf8'));
-
+figlet('Titan Botz', (err) => if(err) return);
+console.log('Titan Botz - v1.0.0\nThis bot is made by Team Titan');
 // === Simple Language API Loader ===
 function loadLang(lang) {
   const langPath = path.join(__dirname, 'languages', `${lang}.json`);
@@ -41,19 +43,23 @@ initDB();
 
 // === Load Commands ===
 const commands = new Map();
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+const commandFiles = fs.readdirSync('./cmds').filter(file => file.endsWith('.js'));
 for (const file of commandFiles) {
-  const command = require(`./commands/${file}`);
+  const command = require(`./src/cmds/${file}`);
   commands.set(command.name, command);
+  console.log(command.name);
 }
-
+let totalCommands = 0;
+console.log(totalCommands);
 // === Load Events ===
 const events = new Map();
 const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
 for (const file of eventFiles) {
-  const event = require(`./events/${file}`);
+  const event = require(`./src/events/${file}`);
   if (event.event) events.set(event.event, event);
 }
+let event = 0;
+// continue 
 
 // === Facebook Login ===
 login({ appState: JSON.parse(fs.readFileSync('appstate.json', 'utf8')) }, (err, api) => {
@@ -62,6 +68,8 @@ login({ appState: JSON.parse(fs.readFileSync('appstate.json', 'utf8')) }, (err, 
   api.listenMqtt(async (err, message) => {
     if (err) return console.error(err);
 
+    console.log('Logged in');
+    console.log('Bot Name: settings.botName'); // add also prefix, and admins with name - id, the botvhas started listening for events
     // Check if message is from allowed group, if in group
     if (message.isGroup && settings.allowedGroups.length > 0 && !settings.allowedGroups.includes(message.threadID)) {
       return api.sendMessage(t('groupNotAllowed'), message.threadID);
@@ -96,7 +104,7 @@ login({ appState: JSON.parse(fs.readFileSync('appstate.json', 'utf8')) }, (err, 
     }
 
     // Welcome message if first message in group
-    if (message.body && message.body.toLowerCase() === `${settings.prefix}start`) {
+    if (message.body && message.body.toLowerCase() === settings.prefix + `start`) {
       return api.sendMessage(
         t('welcome', { botName: settings.botName, prefix: settings.prefix }),
         message.threadID
