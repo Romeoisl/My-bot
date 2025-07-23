@@ -1,0 +1,16 @@
+{
+  "name": "titan-botz",
+  "version": "1.0.0",
+  "description": "A modular Facebook Messenger bot with admin, coins, auto-restart, and multilingual support.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node restart.js"
+  },
+  "dependencies": {
+    "ws3-fca": "^1.3.0",
+    "lowdb": "^6.0.1",
+    "figlet": "^1.7.0"
+  },
+  "author": "Team Titan",
+  "license": "MIT"
+}
