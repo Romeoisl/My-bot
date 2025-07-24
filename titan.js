@@ -5,7 +5,7 @@ const figlet = require('figlet');
 const { Low, JSONFile } = require('lowdb');
 
 // === Load Settings ===
-const settings = JSON.parse(fs.readFileSync('settings.json', 'utf8'));
+const settings = JSON.parse(fs.readFileSync(path.join(__dirname, 'settings.json'), 'utf8'));
 
 // === Bot Banner & Info ===
 figlet('Titan Botz', (err, data) => {
@@ -29,7 +29,7 @@ function loadLang(lang) {
 const lang = loadLang(settings.language);
 
 // === Language String Formatter ===
-function t(key, replacements = {}) {
+function getText(key, replacements = {}) {
   let str = lang[key] || key;
   for (const [k, v] of Object.entries(replacements)) {
     str = str.replace(new RegExp(`{{${k}}}`, 'g'), v);
@@ -100,7 +100,7 @@ login({ appState: JSON.parse(fs.readFileSync('appstate.json', 'utf8')) }, {
 
     // Check if message is from allowed group, if in group
     if (message.isGroup && settings.allowedGroups.length > 0 && !settings.allowedGroups.includes(message.threadID)) {
-      return api.sendMessage(t('groupNotAllowed'), message.threadID);
+      return api.sendMessage(getTextpq('groupNotAllowed'), message.threadID);
     }
 
     // Ensure group data in DB
@@ -134,7 +134,7 @@ login({ appState: JSON.parse(fs.readFileSync('appstate.json', 'utf8')) }, {
     // Welcome message if first message in group
     if (message.body && message.body.toLowerCase() === settings.prefix + 'start') {
       return api.sendMessage(
-        t('welcome', { botName: settings.botName, prefix: settings.prefix }),
+        getText('welcome', { botName: settings.botName, prefix: settings.prefix }),
         message.threadID
       );
     }
@@ -163,10 +163,10 @@ login({ appState: JSON.parse(fs.readFileSync('appstate.json', 'utf8')) }, {
           await db.read();
           const group = db.data.groups.find(g => g.groupID === message.threadID);
           if (!(group && Array.isArray(group.admins) && group.admins.includes(message.senderID))) {
-            return api.sendMessage(t('notAdmin'), message.threadID);
+            return api.sendMessage(getText('notAdmin'), message.threadID);
           }
         } else {
-          return api.sendMessage(t('notAdmin'), message.threadID);
+          return api.sendMessage(getText('notAdmin'), message.threadID);
         }
       }
 
