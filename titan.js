@@ -72,7 +72,9 @@ for (const file of eventFiles) {
   if (event.event) events.set(event.event, event);
 }
 console.log('Total events loaded:', events.size);
-
+if (!JSON.parse(fs.readFileSync('appstate.json', 'utf8'))){
+  return console.error('APPSTATE: Looks like the appstate is missing or empty');
+}
 // === Facebook Login ===
 login({ appState: JSON.parse(fs.readFileSync('appstate.json', 'utf8')) }, {
   online: settings.fcaOptions.online,
