@@ -1,6 +1,6 @@
 const { login } = require('ws3-fca');
 const fs = require('fs');
-const path = require('path');
+const path = require('path'); the
 const figlet = require('figlet');
 const { Low, JSONFile } = require('lowdb');
 
@@ -64,7 +64,7 @@ if (fs.existsSync(cmdDir)) {
 }
 
 // === Check and Load appstate.json ===
-const appState = JSON.parse(fs.readFileSync('appstate.json', 'utf8'));
+const creds = { appState: JSON.parse(fs.readFileSync('appstate.json', 'utf8')) };
 if (!appState || appState.length === 0) {
   console.error('[Error] appstate.json is missing or empty. Please generate a new AppState.');
   process.exit(1);
@@ -86,7 +86,7 @@ async function eventsHandler(api, event) {
 }
 
 // === Facebook Login ===
-login({ appState }, {
+login(creds, {
   online: settings.fcaOptions.online,
   updatePresence: settings.fcaOptions.updatePresence,
   selfListen: settings.fcaOptions.selfListen,
