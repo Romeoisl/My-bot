@@ -1,6 +1,6 @@
 const settings = require('../../settings.json');
 
-const BOT_ID = settings.botID || "";
+const BOT_ID = api.getCurrentUserID() || "";
 
 module.exports = {
   default: {
@@ -35,7 +35,7 @@ module.exports = {
       // === Handle Removed Participants ===
       if (event.logMessageType === 'log:unsubscribe') {
         const leftParticipantID = event.logMessageData?.leftParticipantFbId;
-        const leftParticipantName = event.logMessageBody || "A user";
+        const leftParticipantName = event.logMessageBody || "A Facebook user";
 
         if (leftParticipantID === BOT_ID) {
           for (const adminID of settings.adminIDs) {
