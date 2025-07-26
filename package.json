@@ -7,7 +7,7 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "ws3-fca": "^3.4.2",
+    "ws3-fca": "latest",
     "lowdb": "^2.0.0",
     "figlet": "^1.7.0"
   },
