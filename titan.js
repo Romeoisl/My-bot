@@ -65,10 +65,6 @@ if (fs.existsSync(cmdDir)) {
 
 // === Check and Load appstate.json ===
 const creds = { appState: JSON.parse(fs.readFileSync('appstate.json', 'utf8')) };
-if (!appState || appState.length === 0) {
-  console.error('[Error] appstate.json is missing or empty. Please generate a new AppState.');
-  process.exit(1);
-}
 
 // === New Event Handler ===
 async function eventsHandler(api, event) {
@@ -153,7 +149,7 @@ login(creds, {
       const commandName = args.shift().toLowerCase();
       const command = commands.get(commandName);
 
-      if (!command) return api.sendMessage('The command you are using does not exist', message.threadID);
+      if (!command) return api.sendMessage('The command you are using does not exist.', message.threadID);
 
       try {
         if (command.adminOnly && !settings.adminIDs.includes(message.senderID)) {
