@@ -63,25 +63,26 @@ if (fs.existsSync(cmdDir)) {
   console.warn('[Warning] Commands directory not found. Skipping command loading.');
 }
 
-// === Load Events ===
-const events = new Map();
-const eventDir = path.join(__dirname, 'src', 'events');
-if (fs.existsSync(eventDir)) {
-  const eventFiles = fs.readdirSync(eventDir).filter(file => file.endsWith('.js'));
-  for (const file of eventFiles) {
-    const event = require(path.join(eventDir, file));
-    if (event.event) events.set(event.event, event);
-  }
-  console.log('Total events loaded:', events.size);
-} else {
-  console.warn('[Warning] Events directory not found. Skipping event loading.');
-}
-
 // === Check and Load appstate.json ===
 const appState = JSON.parse(fs.readFileSync('appstate.json', 'utf8'));
 if (!appState || appState.length === 0) {
   console.error('[Error] appstate.json is missing or empty. Please generate a new AppState.');
   process.exit(1);
+}
+
+// === New Event Handler ===
+async function eventsHandler(api, event) {
+  const eventsPath = path.join(__dirname, '..', 'src', 'events');
+  const eventFiles = fs.readdirSync(eventsPath);
+
+  for (const file of eventFiles) {
+    if (file.endsWith('.js')) {
+      const eventFunction = await require(path.join(eventsPath, file));
+      if (eventFunction.default.eventType === event.logMessageType) {
+        await eventFunction.default.run(api, event);
+      }
+    }
+  }
 }
 
 // === Facebook Login ===
@@ -109,6 +110,9 @@ login({ appState }, {
   // === Bot Event Listener ===
   api.listenMqtt(async (err, message) => {
     if (err) return console.error('[Error] Failed to listen for events:', err);
+
+    // Invoke new event handler for every event
+    await eventsHandler(api, message);
 
     // Check if message is from allowed group
     if (message.isGroup && settings.allowedGroups.length > 0 && !settings.allowedGroups.includes(message.threadID)) {
@@ -149,10 +153,8 @@ login({ appState }, {
       const commandName = args.shift().toLowerCase();
       const command = commands.get(commandName);
 
-      if (!command) {
-        return api.sendMessage(getText('CmdNotFound'), message.threadID);
-      }
-      
+      if (!command) return api.sendMessage('The command you are using does not exist', message.threadID);
+
       try {
         if (command.adminOnly && !settings.adminIDs.includes(message.senderID)) {
           return api.sendMessage(getText('notAdmin'), message.threadID);
