@@ -42,7 +42,6 @@ const db = new Low(new JSONFile('db.json'));
 async function initDB() {
   await db.read();
   db.data ||= { users: [], groups: [], history: [] };
-  // Ensure all users have coins field
   for (const user of db.data.users) {
     if (user.coins === undefined) user.coins = 0;
   }
@@ -53,36 +52,46 @@ initDB();
 // === Load Commands ===
 const commands = new Map();
 const cmdDir = path.join(__dirname, 'src', 'cmds');
-const commandFiles = fs.readdirSync(cmdDir).filter(file => file.endsWith('.js'));
-
-for (const file of commandFiles) {
-  const command = require(path.join(cmdDir, file));
-  commands.set(command.name, command);
+if (fs.existsSync(cmdDir)) {
+  const commandFiles = fs.readdirSync(cmdDir).filter(file => file.endsWith('.js'));
+  for (const file of commandFiles) {
+    const command = require(path.join(cmdDir, file));
+    commands.set(command.name, command);
+  }
+  console.log('Total commands loaded:', commands.size);
+} else {
+  console.warn('[Warning] Commands directory not found. Skipping command loading.');
 }
-console.log('Loading files from src');
-console.log('Total commands loaded:', commands.size);
 
 // === Load Events ===
 const events = new Map();
 const eventDir = path.join(__dirname, 'src', 'events');
-const eventFiles = fs.readdirSync(eventDir).filter(file => file.endsWith('.js'));
+if (fs.existsSync(eventDir)) {
+  const eventFiles = fs.readdirSync(eventDir).filter(file => file.endsWith('.js'));
+  for (const file of eventFiles) {
+    const event = require(path.join(eventDir, file));
+    if (event.event) events.set(event.event, event);
+  }
+  console.log('Total events loaded:', events.size);
+} else {
+  console.warn('[Warning] Events directory not found. Skipping event loading.');
+}
 
-for (const file of eventFiles) {
-  const event = require(path.join(eventDir, file));
-  if (event.event) events.set(event.event, event);
+// === Check and Load appstate.json ===
+const appState = JSON.parse(fs.readFileSync('appstate.json', 'utf8'));
+if (!appState || appState.length === 0) {
+  console.error('[Error] appstate.json is missing or empty. Please generate a new AppState.');
+  process.exit(1);
 }
-console.log('Total events loaded:', events.size);
-if (!JSON.parse(fs.readFileSync('appstate.json', 'utf8'))){
-  return console.error('APPSTATE: Looks like the appstate is missing or empty');
-}
+
 // === Facebook Login ===
-login({ appState: JSON.parse(fs.readFileSync('appstate.json', 'utf8')) }, {
+login({ appState }, {
   online: settings.fcaOptions.online,
   updatePresence: settings.fcaOptions.updatePresence,
   selfListen: settings.fcaOptions.selfListen,
-  randomUserAgent: false
+  randomUserAgent: false,
 }, (err, api) => {
-  if (err) return console.error(err);
+  if (err) return console.error('[Error] Facebook Login Failed:', err);
 
   // Print bot info when logged in
   (async () => {
@@ -97,12 +106,13 @@ login({ appState: JSON.parse(fs.readFileSync('appstate.json', 'utf8')) }, {
     console.log('The bot has started listening for events...');
   })();
 
+  // === Bot Event Listener ===
   api.listenMqtt(async (err, message) => {
-    if (err) return console.error(err);
+    if (err) return console.error('[Error] Failed to listen for events:', err);
 
-    // Check if message is from allowed group, if in group
+    // Check if message is from allowed group
     if (message.isGroup && settings.allowedGroups.length > 0 && !settings.allowedGroups.includes(message.threadID)) {
-      return api.sendMessage(getTextpq('groupNotAllowed'), message.threadID);
+      return api.sendMessage(getText('groupNotAllowed'), message.threadID);
     }
 
     // Ensure group data in DB
@@ -133,51 +143,21 @@ login({ appState: JSON.parse(fs.readFileSync('appstate.json', 'utf8')) }, {
       }
     }
 
-    // Welcome message if first message in group
-    if (message.body && message.body.toLowerCase() === settings.prefix + 'start') {
-      return api.sendMessage(
-        getText('welcome', { botName: settings.botName, prefix: settings.prefix }),
-        message.threadID
-      );
-    }
-
-    // Always trigger the 'message' event
-    if (events.has('message')) {
-      try {
-        await events.get('message').handler(api, message, db, settings, t);
-      } catch (e) {
-        console.error('[Event:message] Error:', e);
-      }
-    }
-
     // Command handling
     if (message.body && message.body.startsWith(settings.prefix)) {
       const args = message.body.slice(settings.prefix.length).trim().split(/ +/g);
       const commandName = args.shift().toLowerCase();
       const command = commands.get(commandName);
 
-      if (!command) return;
-
-      // Admin-only system example
-      if (command.adminOnly && !settings.adminIDs.includes(message.senderID)) {
-        // Check group admin
-        if (message.isGroup) {
-          await db.read();
-          const group = db.data.groups.find(g => g.groupID === message.threadID);
-          if (!(group && Array.isArray(group.admins) && group.admins.includes(message.senderID))) {
-            return api.sendMessage(getText('notAdmin'), message.threadID);
-          }
-        } else {
+      if (!command) {
+        return api.sendMessage(getText('CmdNotFound'), message.threadID);
+      }
+      
+      try {
+        if (command.adminOnly && !settings.adminIDs.includes(message.senderID)) {
           return api.sendMessage(getText('notAdmin'), message.threadID);
         }
-      }
-
-      try {
-        await command.execute(api, message, args, db, settings, t);
-        // Trigger event hooks for add/remove/update, etc
-        if (events.has(commandName)) {
-          await events.get(commandName).handler(api, message, args, db, settings, t);
-        }
+        await command.execute(api, message, args, db, settings, getText);
       } catch (e) {
         api.sendMessage('Error executing command.', message.threadID);
         console.error('[Command] Error:', e);
