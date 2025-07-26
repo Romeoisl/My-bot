@@ -1,6 +1,6 @@
 const { login } = require('ws3-fca');
 const fs = require('fs');
-const path = require('path'); the
+const path = require('path');
 const figlet = require('figlet');
 const { Low, JSONFile } = require('lowdb');
 
@@ -108,9 +108,9 @@ login(creds, {
   })();
 
   // === Bot Event Listener ===
-  api.listenMqtt(async (err, message) => {
+  api.listenMqtt(async (err, event) => {
     if (err) return console.error('[Error] Failed to listen for events:', err);
-
+    const message = event;
     // Invoke new event handler for every event
     await eventsHandler(api, message);
 
