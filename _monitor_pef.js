@@ -7,7 +7,7 @@ const {
   HEARTBEAT_INTERVAL_MS = 1 * 60 * 1000, // 1 minute
   POLLING_INTERVAL_MS = 5 * 60 * 1000, // 5 minutes
   MAX_RETRIES = 3,
-  LOG_FILE = 'heartbeat-log.json',
+  LOG_FILE = 'monitlog.json',
 } = process.env;
 
 if (!DEPLOYED_URL) {
@@ -129,5 +129,6 @@ async function main() {
     await new Promise((resolve) => setTimeout(resolve, 1000)); // check every second
   }
 }
-
-main().catch((error) => console.error(`Main error: ${error.message}`));
+module.exports = {
+  main: main().catch((error) => console.error(`Main error: ${error.message}`));
+}
