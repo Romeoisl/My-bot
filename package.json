@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A modular Facebook Messenger bot with admin, coins, auto-restart, and multilingual support.",
   "main": "index.js",
+  
   "scripts": {
     "start": "node index.js"
   },
@@ -13,4 +14,7 @@
   },
   "author": "Team Titan",
   "license": "MIT"
-}
+  "engines": {
+    "node": "18.x",
+    "npm": "8.x"
+  }
