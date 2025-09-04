@@ -8,7 +8,7 @@
     "dev": "nodemon index.js"
   },
   "dependencies": {
-    "ws3-fca": "^3.4.2",
+    "ws3-fca": "^3.4.3",
     "figlet": "^1.6.0",
     "mongodb": "^6.3.0",
     "fontstyles": "latest"
