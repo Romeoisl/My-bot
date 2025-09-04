@@ -130,5 +130,6 @@ async function main() {
   }
 }
 module.exports = {
-  main: main().catch((error) => console.error(`Main error: ${error.message}`));
-}
+  start: main().catch((error) => console.error(`Main error: ${error.message}`));
+
+};
