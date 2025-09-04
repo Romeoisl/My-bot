@@ -10,7 +10,8 @@
   "dependencies": {
     "ws3-fca": "latest",
     "figlet": "^1.6.0",
-    "mongodb": "^6.3.0"
+    "mongodb": "^6.3.0",
+    "fontstyles": "latest"
   },
   "devDependencies": {
     "nodemon": "^3.0.2"
