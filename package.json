@@ -1,21 +1,18 @@
 {
-  "name": "titan-botz",
+  "name": "titan-bot",
   "version": "1.0.0",
-  "description": "A modular Facebook Messenger bot with admin, coins, auto-restart, and multilingual support.",
+  "description": "Facebook bot made by team titans",
   "main": "index.js",
-  
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "dependencies": {
     "ws3-fca": "latest",
-    "lowdb": "^2.0.0",
-    "figlet": "^1.7.0"
+    "figlet": "^1.6.0",
+    "mongodb": "^6.3.0"
   },
-  "author": "Team Titan",
-  "license": "MIT",
-  "engines": {
-    "node": "18.x",
-    "npm": "8.x"
-  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
 }
