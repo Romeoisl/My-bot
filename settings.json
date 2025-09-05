@@ -1,16 +1,1 @@
-{
-  "botName": "Titan-botz",
-  "prefix": "/",
-  "adminIDs": [],
-  "ownerID": "", 
-  "welcomeMessage": "Hello! I am Titan-botz. Type /help to see my commands.",
-  "allowedGroups": [],
-  "language": "en",
-  "restartIntervalMinutes": 60,
-  "fcaOptions": {
-    "online": true,
-    "updatePresence": true,
-    "selfListen": false,
-    "randomUserAgent": false
-  }
-}
+{ "botName": "Titan-botz", "prefix": "/", "adminIDs": ["100017555747989"], "ownerID": "", "welcomeMessage": "Hello! I am Titan-botz. Type /help to see my commands.", "allowedGroups": [], "language": "en", "restartIntervalMinutes": 60, "fcaOptions": { "online": true, "updatePresence": true, "selfListen": false, "randomUserAgent": false } }
