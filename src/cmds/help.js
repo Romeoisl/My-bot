@@ -1,4 +1,6 @@
 const { bold } = require("fontstyles");
+const fs = require("fs");
+const path = require("path");
 
 module.exports = {
   name: "help",
@@ -6,8 +8,22 @@ module.exports = {
   role: 0,
   category: "general",
   execute: async (api, message, args, db, settings, getText) => {
-    // You must access global.commands here!
-    const commands = global.commands || new Map();
+    // Dynamically read commands from the same directory
+    const cmdsDir = __dirname;
+    const commandFiles = fs.readdirSync(cmdsDir)
+      .filter(file => file.endsWith('.js') && file !== path.basename(__filename));
+    const commands = new Map();
+
+    for (const file of commandFiles) {
+      try {
+        const cmd = require(path.join(cmdsDir, file));
+        if (cmd && cmd.name) commands.set(cmd.name, cmd);
+      } catch (e) {
+        // Ignore broken files
+      }
+    }
+    // Also include itself (help)
+    commands.set(module.exports.name, module.exports);
 
     const categories = {};
     let totalCommands = 0;
