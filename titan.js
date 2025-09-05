@@ -155,8 +155,7 @@ function printBanner() {
   } else {
     console.warn("[Warning] Commands directory not found. Skipping command loading.")
   }
-  
-  global.commands = command;
+
   // === Check and Load appstate.json ===
   const creds = {
     appState: JSON.parse(fs.readFileSync("appstate.json", "utf8")),
