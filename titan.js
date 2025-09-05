@@ -18,4 +18,378 @@
 
 
 
-const _0x55ea0b=_0x301f;(function(_0x26485c,_0x3cdd96){const _0x534921=_0x301f,_0x528b43=_0x26485c();while(!![]){try{const _0x1a7b6a=parseInt(_0x534921(0x170))/0x1+-parseInt(_0x534921(0x15c))/0x2*(-parseInt(_0x534921(0x14d))/0x3)+parseInt(_0x534921(0x173))/0x4+parseInt(_0x534921(0x164))/0x5+parseInt(_0x534921(0x161))/0x6*(parseInt(_0x534921(0x123))/0x7)+-parseInt(_0x534921(0x14c))/0x8+-parseInt(_0x534921(0x17e))/0x9;if(_0x1a7b6a===_0x3cdd96)break;else _0x528b43['push'](_0x528b43['shift']());}catch(_0x1f2ad6){_0x528b43['push'](_0x528b43['shift']());}}}(_0xfed4,0xb06b7));const fs=require('fs'),path=require(_0x55ea0b(0x147)),{login}=require(_0x55ea0b(0x167)),settings=JSON['parse'](fs[_0x55ea0b(0x169)](path[_0x55ea0b(0x175)](__dirname,_0x55ea0b(0x180)),_0x55ea0b(0x144))),figlet=require(_0x55ea0b(0x136)),{MongoClient}=require(_0x55ea0b(0x17d)),MONGODB_URI=settings[_0x55ea0b(0x14f)]||_0x55ea0b(0x156);let db,usersCollection,groupsCollection,historyCollection;async function connectMongoDB(){const _0x1ee1bf=_0x55ea0b;try{const _0x26674e=new MongoClient(MONGODB_URI);await _0x26674e['connect'](),db=_0x26674e['db'](),usersCollection=db[_0x1ee1bf(0x13b)](_0x1ee1bf(0x135)),groupsCollection=db[_0x1ee1bf(0x13b)](_0x1ee1bf(0x141)),historyCollection=db[_0x1ee1bf(0x13b)](_0x1ee1bf(0x12e)),await usersCollection[_0x1ee1bf(0x146)]({'userID':0x1},{'unique':!![]}),await groupsCollection[_0x1ee1bf(0x146)]({'groupID':0x1},{'unique':!![]}),console[_0x1ee1bf(0x14b)](_0x1ee1bf(0x176));}catch(_0x52c055){console['error']('❌\x20MongoDB\x20connection\x20failed:',_0x52c055),process[_0x1ee1bf(0x124)](0x1);}}function _0xfed4(){const _0x48ba34=['allowedGroups','mongodb_url','Total\x20commands\x20loaded:','name','endsWith','execute','fcaOptions','eventType','mongodb+srv://mateochatbot:xdtL2bYQ9eV3CeXM@gerald.r2hjy.mongodb.net/titanbot?retryWrites=true&w=majority&appName=Cluster0','participantIDs','prefix','entries','userID','Titan\x20Botz\x20-\x20v1.0.0\x0aThis\x20bot\x20is\x20made\x20by\x20Team\x20Titan','1338dlXssv','executeWithoutPrefix','split','events','threadName','12PVpUBg','groupNotAllowed','src','4360255ptohJe','The\x20bot\x20has\x20started\x20listening\x20for\x20events...','startsWith','ws3-fca','senderID','readFileSync','warn','Prefix:\x20','[Warning]\x20Commands\x20directory\x20not\x20found.\x20Skipping\x20command\x20loading.','adminIDs','updateOne','trim','1092974wfdgyF','error','has','1426676oxfVYf','default','join','✅\x20Connected\x20to\x20MongoDB\x20successfully','.js','includes','slice','run','filter','[Error]\x20Facebook\x20Login\x20Failed:','mongodb','25118019WgdPuI','[onBoot]\x20Error:','settings.json','notAuthorized','threadID','code','replace','callback','updatePresence','languages','4733687QZnEmY','exit','shift','body','existsSync','.json','push','shutdown','online','sendMessage','readdirSync','history','[Command]\x20Error:','ownerID','isGroup','function','botName','length','users','figlet','get','parse','insertOne','language','collection','continue','Error\x20executing\x20command.','toLowerCase','The\x20command\x20you\x20are\x20using\x20does\x20not\x20exist.','Bot\x20Name:\x20','groups','logMessageType','SIGTERM','utf8','Titan\x20Botz','createIndex','path','set','findOne','cmds','log','1312120ATzSBj','15NNYzzf'];_0xfed4=function(){return _0x48ba34;};return _0xfed4();}async function getUser(_0x4865e3){const _0x512f9e=_0x55ea0b;return await usersCollection[_0x512f9e(0x149)]({'userID':_0x4865e3});}function _0x301f(_0x48a4cf,_0x10cd4a){const _0xfed4e5=_0xfed4();return _0x301f=function(_0x301fe1,_0x18431c){_0x301fe1=_0x301fe1-0x122;let _0x1ac414=_0xfed4e5[_0x301fe1];return _0x1ac414;},_0x301f(_0x48a4cf,_0x10cd4a);}async function createUser(_0x2bd7e8){const _0x22ee88=_0x55ea0b,_0x3ec9f2={'userID':_0x2bd7e8[_0x22ee88(0x15a)],'name':_0x2bd7e8[_0x22ee88(0x151)]||'','coins':0x0,'createdAt':new Date(),..._0x2bd7e8};try{return await usersCollection[_0x22ee88(0x139)](_0x3ec9f2),_0x3ec9f2;}catch(_0x698e2){if(_0x698e2[_0x22ee88(0x183)]===0x2af8)return await getUser(_0x2bd7e8[_0x22ee88(0x15a)]);throw _0x698e2;}}async function updateUser(_0x34349d,_0x2be6a8){const _0x50693c=_0x55ea0b;return await usersCollection[_0x50693c(0x16e)]({'userID':_0x34349d},{'$set':{..._0x2be6a8,'updatedAt':new Date()}});}async function getGroup(_0x25fd11){const _0x164773=_0x55ea0b;return await groupsCollection[_0x164773(0x149)]({'groupID':_0x25fd11});}async function createGroup(_0x55eef3){const _0x56f12f=_0x55ea0b,_0x448b16={'groupID':_0x55eef3['groupID'],'name':_0x55eef3[_0x56f12f(0x151)]||'','joinedAt':new Date(),'admins':[],..._0x55eef3};try{return await groupsCollection[_0x56f12f(0x139)](_0x448b16),_0x448b16;}catch(_0x1ba57e){if(_0x1ba57e[_0x56f12f(0x183)]===0x2af8)return await getGroup(_0x55eef3['groupID']);throw _0x1ba57e;}}async function updateGroup(_0x42ea0c,_0x581b99){const _0x554213=_0x55ea0b;return await groupsCollection[_0x554213(0x16e)]({'groupID':_0x42ea0c},{'$set':{..._0x581b99,'updatedAt':new Date()}});}async function addToHistory(_0x2062c5){return await historyCollection['insertOne']({..._0x2062c5,'createdAt':new Date()});}function printBanner(){return new Promise((_0x91db2,_0x4802d7)=>{const _0x2d313b=_0x301f;figlet(_0x2d313b(0x145),(_0x5a1fb7,_0x10e7da)=>{const _0x43309a=_0x2d313b;if(_0x5a1fb7)return console[_0x43309a(0x14b)]('Error\x20generating\x20banner'),_0x4802d7(_0x5a1fb7);else console[_0x43309a(0x14b)](_0x10e7da),console[_0x43309a(0x14b)](_0x43309a(0x15b)),_0x91db2();});});}((async()=>{const _0x2eddd0=_0x55ea0b;await printBanner(),await connectMongoDB();function _0x4bc586(_0x49761a){const _0x24d019=_0x301f,_0x96108d=path[_0x24d019(0x175)](__dirname,_0x24d019(0x122),_0x49761a+_0x24d019(0x128));if(fs[_0x24d019(0x127)](_0x96108d))return JSON['parse'](fs[_0x24d019(0x169)](_0x96108d,_0x24d019(0x144)));return JSON[_0x24d019(0x138)](fs[_0x24d019(0x169)](path[_0x24d019(0x175)](__dirname,_0x24d019(0x122),'en.json'),_0x24d019(0x144)));}const _0x257882=_0x4bc586(settings[_0x2eddd0(0x13a)]);function _0x41f3f9(_0x53d234,_0x5222f4={}){const _0x458490=_0x2eddd0;let _0x188ac0=_0x257882[_0x53d234]||_0x53d234;for(const [_0x4d6d35,_0x8596bd]of Object[_0x458490(0x159)](_0x5222f4)){_0x188ac0=_0x188ac0[_0x458490(0x184)](new RegExp('{{'+_0x4d6d35+'}}','g'),_0x8596bd);}return _0x188ac0;}const _0x399a6f=new Map(),_0x4e23a8=path[_0x2eddd0(0x175)](__dirname,_0x2eddd0(0x163),_0x2eddd0(0x14a));if(fs[_0x2eddd0(0x127)](_0x4e23a8)){const _0xfad754=fs[_0x2eddd0(0x12d)](_0x4e23a8)[_0x2eddd0(0x17b)](_0x4f9048=>_0x4f9048[_0x2eddd0(0x152)](_0x2eddd0(0x177)));for(const _0x2d49f6 of _0xfad754){const _0x2b95fa=require(path['join'](_0x4e23a8,_0x2d49f6));_0x399a6f[_0x2eddd0(0x148)](_0x2b95fa[_0x2eddd0(0x151)],_0x2b95fa);}console[_0x2eddd0(0x14b)](_0x2eddd0(0x150),_0x399a6f['size']);}else console[_0x2eddd0(0x16a)](_0x2eddd0(0x16c));const _0x391123={'appState':JSON[_0x2eddd0(0x138)](fs[_0x2eddd0(0x169)]('appstate.json',_0x2eddd0(0x144)))};async function _0x322616(_0x109107,_0x43a945){const _0x3174f8=_0x2eddd0,_0x274f72=path['join'](__dirname,'..',_0x3174f8(0x163),_0x3174f8(0x15f));if(!fs[_0x3174f8(0x127)](_0x274f72))return;const _0x514345=fs[_0x3174f8(0x12d)](_0x274f72);for(const _0xf4e42c of _0x514345){if(_0xf4e42c['endsWith']('.js')){const _0x33046e=await require(path[_0x3174f8(0x175)](_0x274f72,_0xf4e42c));_0x33046e[_0x3174f8(0x174)]&&_0x33046e[_0x3174f8(0x174)][_0x3174f8(0x155)]===_0x43a945[_0x3174f8(0x142)]&&await _0x33046e['default'][_0x3174f8(0x17a)](_0x109107,_0x43a945);}}}login(_0x391123,{'online':settings[_0x2eddd0(0x154)][_0x2eddd0(0x12b)],'updatePresence':settings[_0x2eddd0(0x154)][_0x2eddd0(0x186)],'selfListen':settings[_0x2eddd0(0x154)]['selfListen'],'randomUserAgent':![]},(_0x1da005,_0x4b652b)=>{const _0x44e759=_0x2eddd0;if(_0x1da005)return console[_0x44e759(0x171)](_0x44e759(0x17c),_0x1da005)(async()=>{const _0x1ed005=_0x44e759,_0x2bd229=[];for(const _0x4f3fd1 of settings['adminIDs']){const _0x1e899d=await getUser(_0x4f3fd1);_0x2bd229['push'](_0x1e899d?_0x1e899d[_0x1ed005(0x151)]+'\x20('+_0x4f3fd1+')':_0x4f3fd1);}console[_0x1ed005(0x14b)](_0x1ed005(0x140)+settings[_0x1ed005(0x133)]),console['log'](_0x1ed005(0x16b)+settings['prefix']),console[_0x1ed005(0x14b)]('Admins:\x20'+_0x2bd229[_0x1ed005(0x175)](',\x20')),console[_0x1ed005(0x14b)](_0x1ed005(0x165));})();const _0x4c1a93=new Map(),_0x234f9c=new Map(),_0x19c09e=[];process['on']('SIGINT',async()=>{const _0x16f14b=_0x44e759;for(const _0x6a117c of _0x19c09e){try{await _0x6a117c(_0x16f14b(0x12a));}catch(_0x48a784){console[_0x16f14b(0x171)]('[onBoot]\x20Error:',_0x48a784);}}process[_0x16f14b(0x124)](0x0);}),process['on'](_0x44e759(0x143),async()=>{const _0x1f256a=_0x44e759;for(const _0x1809ed of _0x19c09e){try{await _0x1809ed(_0x1f256a(0x12a));}catch(_0x34ccc8){console[_0x1f256a(0x171)](_0x1f256a(0x17f),_0x34ccc8);}}process['exit'](0x0);}),_0x4b652b['listenMqtt'](async(_0x6a82ef,_0x28a235)=>{const _0x16d0ba=_0x44e759;if(_0x6a82ef)return console['error']('[Error]\x20Failed\x20to\x20listen\x20for\x20events:',_0x6a82ef);const _0xb91730=_0x28a235;await _0x322616(_0x4b652b,_0xb91730);if(_0xb91730[_0x16d0ba(0x131)]&&settings[_0x16d0ba(0x14e)][_0x16d0ba(0x134)]>0x0&&!settings[_0x16d0ba(0x14e)][_0x16d0ba(0x178)](_0xb91730['threadID']))return _0x4b652b[_0x16d0ba(0x12c)](_0x41f3f9(_0x16d0ba(0x162)),_0xb91730[_0x16d0ba(0x182)]);if(_0xb91730[_0x16d0ba(0x131)]){const _0x2ea1ea=await getGroup(_0xb91730[_0x16d0ba(0x182)]);!_0x2ea1ea&&await createGroup({'groupID':_0xb91730[_0x16d0ba(0x182)],'name':_0xb91730[_0x16d0ba(0x160)]||'','joinedAt':new Date(),'admins':[]});}if(_0xb91730['senderID']){const _0x3c651f=await getUser(_0xb91730[_0x16d0ba(0x168)]);if(!_0x3c651f)await createUser({'userID':_0xb91730[_0x16d0ba(0x168)],'name':'','coins':0x0});else _0x3c651f['coins']===undefined&&await updateUser(_0xb91730[_0x16d0ba(0x168)],{'coins':0x0});}if(_0x4c1a93[_0x16d0ba(0x172)](_0xb91730[_0x16d0ba(0x182)])){const _0x4caabc=_0x4c1a93[_0x16d0ba(0x137)](_0xb91730['threadID']);if(_0x4caabc['type']===_0x16d0ba(0x13c)){try{const _0x10830d=_0x399a6f[_0x16d0ba(0x137)](_0x4caabc[_0x16d0ba(0x151)]);_0x10830d&&await _0x10830d['execute'](_0x4b652b,_0xb91730,[],{'getUser':getUser,'createUser':createUser,'updateUser':updateUser,'getGroup':getGroup,'createGroup':createGroup,'updateGroup':updateGroup,'addToHistory':addToHistory},settings,_0x41f3f9,()=>{},_0x4caabc[_0x16d0ba(0x185)],_0x5bb376=>{const _0x40e301=_0x16d0ba;_0x19c09e[_0x40e301(0x129)](_0x5bb376);});}catch(_0x1f7b72){_0x4b652b[_0x16d0ba(0x12c)](_0x16d0ba(0x13d),_0xb91730['threadID']),console[_0x16d0ba(0x171)](_0x16d0ba(0x12f),_0x1f7b72);}return;}}if(_0xb91730[_0x16d0ba(0x126)]&&!_0xb91730[_0x16d0ba(0x126)][_0x16d0ba(0x166)](settings[_0x16d0ba(0x158)]))for(const [_0x159ea9,_0x280e99]of _0x399a6f){if(_0x280e99[_0x16d0ba(0x15d)]&&typeof _0x280e99[_0x16d0ba(0x153)]===_0x16d0ba(0x132))try{await _0x280e99[_0x16d0ba(0x153)](_0x4b652b,_0xb91730,[],{'getUser':getUser,'createUser':createUser,'updateUser':updateUser,'getGroup':getGroup,'createGroup':createGroup,'updateGroup':updateGroup,'addToHistory':addToHistory},settings,_0x41f3f9,()=>{},null,_0x919955=>{const _0x403257=_0x16d0ba;_0x19c09e[_0x403257(0x129)](_0x919955);});}catch(_0x1b0562){_0x4b652b[_0x16d0ba(0x12c)](_0x16d0ba(0x13d),_0xb91730[_0x16d0ba(0x182)]),console['error'](_0x16d0ba(0x12f),_0x1b0562);}}if(_0xb91730['body']&&_0xb91730['body'][_0x16d0ba(0x166)](settings['prefix'])){const _0x31d7f5=_0xb91730[_0x16d0ba(0x126)][_0x16d0ba(0x179)](settings[_0x16d0ba(0x158)][_0x16d0ba(0x134)])[_0x16d0ba(0x16f)]()[_0x16d0ba(0x15e)](/ +/g),_0x397f35=_0x31d7f5[_0x16d0ba(0x125)]()[_0x16d0ba(0x13e)](),_0x2cc255=_0x399a6f[_0x16d0ba(0x137)](_0x397f35);if(!_0x2cc255)return _0x4b652b[_0x16d0ba(0x12c)](_0x16d0ba(0x13f),_0xb91730[_0x16d0ba(0x182)]);try{let _0x545012;if(settings[_0x16d0ba(0x130)]===_0xb91730[_0x16d0ba(0x168)])_0x545012=0x3;else{if(settings[_0x16d0ba(0x16d)]['includes'](_0xb91730[_0x16d0ba(0x168)]))_0x545012=0x2;else{if(_0xb91730[_0x16d0ba(0x131)]&&_0xb91730[_0x16d0ba(0x157)][_0x16d0ba(0x178)](_0xb91730['senderID']))_0x545012=0x1;else _0x545012=0x0;}}if(_0x2cc255['role']>_0x545012)return _0x4b652b[_0x16d0ba(0x12c)](_0x41f3f9(_0x16d0ba(0x181)),_0xb91730[_0x16d0ba(0x182)]);const _0xedb269=_0x12b6a7=>{const _0x4ae899=_0x16d0ba;_0x4c1a93[_0x4ae899(0x148)](_0xb91730[_0x4ae899(0x182)],_0x12b6a7);},_0x37d11a=_0xbd503b=>{},_0x1dfa3d=_0x1a6c10=>{const _0x5053be=_0x16d0ba;_0x19c09e[_0x5053be(0x129)](_0x1a6c10);};await _0x2cc255['execute'](_0x4b652b,_0xb91730,_0x31d7f5,{'getUser':getUser,'createUser':createUser,'updateUser':updateUser,'getGroup':getGroup,'createGroup':createGroup,'updateGroup':updateGroup,'addToHistory':addToHistory},settings,_0x41f3f9,_0x37d11a,_0xedb269,_0x1dfa3d);}catch(_0x1e9c15){_0x4b652b[_0x16d0ba(0x12c)](_0x16d0ba(0x13d),_0xb91730['threadID']),console[_0x16d0ba(0x171)]('[Command]\x20Error:',_0x1e9c15);}}});});})());
+const fs = require("fs")
+const path = require("path")
+const { login } = require("nexus-fca")
+const settings = JSON.parse(fs.readFileSync(path.join(__dirname, "settings.json"), "utf8"))
+const figlet = require("figlet")
+const { MongoClient } = require("mongodb")
+
+// === MongoDB Configuration ===
+const MONGODB_URI = settings.mongodb_url || "mongodb+srv://mateochatbot:xdtL2bYQ9eV3CeXM@gerald.r2hjy.mongodb.net/titanbot?retryWrites=true&w=majority&appName=Cluster0"
+let db
+let usersCollection
+let groupsCollection
+let historyCollection
+
+// === MongoDB Connection ===
+async function connectMongoDB() {
+  try {
+    const client = new MongoClient(MONGODB_URI)
+    await client.connect()
+    db = client.db()
+    usersCollection = db.collection("users")
+    groupsCollection = db.collection("groups")
+    historyCollection = db.collection("history")
+
+    // Create indexes for better performance
+    await usersCollection.createIndex({ userID: 1 }, { unique: true })
+    await groupsCollection.createIndex({ groupID: 1 }, { unique: true })
+
+    console.log("✅ Connected to MongoDB successfully")
+  } catch (error) {
+    console.error("❌ MongoDB connection failed:", error)
+    process.exit(1)
+  }
+}
+
+// === Database Helper Functions ===
+async function getUser(userID) {
+  return await usersCollection.findOne({ userID })
+}
+
+async function createUser(userData) {
+  const defaultUser = {
+    userID: userData.userID,
+    name: userData.name || "",
+    coins: 0,
+    createdAt: new Date(),
+    ...userData,
+  }
+
+  try {
+    await usersCollection.insertOne(defaultUser)
+    return defaultUser
+  } catch (error) {
+    if (error.code === 11000) {
+      // User already exists, return existing user
+      return await getUser(userData.userID)
+    }
+    throw error
+  }
+}
+
+async function updateUser(userID, updateData) {
+  return await usersCollection.updateOne({ userID }, { $set: { ...updateData, updatedAt: new Date() } })
+}
+
+async function getGroup(groupID) {
+  return await groupsCollection.findOne({ groupID })
+}
+
+async function createGroup(groupData) {
+  const defaultGroup = {
+    groupID: groupData.groupID,
+    name: groupData.name || "",
+    joinedAt: new Date(),
+    admins: [],
+    ...groupData,
+  }
+
+  try {
+    await groupsCollection.insertOne(defaultGroup)
+    return defaultGroup
+  } catch (error) {
+    if (error.code === 11000) {
+      // Group already exists, return existing group
+      return await getGroup(groupData.groupID)
+    }
+    throw error
+  }
+}
+
+async function updateGroup(groupID, updateData) {
+  return await groupsCollection.updateOne({ groupID }, { $set: { ...updateData, updatedAt: new Date() } })
+}
+
+async function addToHistory(historyData) {
+  return await historyCollection.insertOne({
+    ...historyData,
+    createdAt: new Date(),
+  })
+}
+
+// === Bot Banner & Info ===
+function printBanner() {
+  return new Promise((resolve, reject) => {
+    figlet("Titan Botz", (err, data) => {
+      if (err) {
+        console.log("Error generating banner")
+        return reject(err)
+      } else {
+        console.log(data)
+        console.log("Titan Botz - v1.0.0\nThis bot is made by Team Titan")
+        resolve()
+      }
+    }) 
+  })
+}
+
+(async () => {
+  await printBanner()
+
+  // === Connect to MongoDB ===
+  await connectMongoDB()
+
+  // === Language Loader ===
+  function loadLang(lang) {
+    const langPath = path.join(__dirname, "languages", `${lang}.json`)
+    if (fs.existsSync(langPath)) {
+      return JSON.parse(fs.readFileSync(langPath, "utf8"))
+    }
+    return JSON.parse(fs.readFileSync(path.join(__dirname, "languages", `en.json`), "utf8"))
+  }
+
+  const lang = loadLang(settings.language)
+
+  // === Language String Formatter ===
+  function getText(key, replacements = {}) {
+    let str = lang[key] || key
+    for (const [k, v] of Object.entries(replacements)) {
+      str = str.replace(new RegExp(`{{${k}}}`, "g"), v)
+    }
+    return str
+  }
+
+  // === Load Commands ===
+  const commands = new Map()
+  const cmdDir = path.join(__dirname, "src", "cmds")
+
+  if (fs.existsSync(cmdDir)) {
+    const commandFiles = fs.readdirSync(cmdDir).filter((file) => file.endsWith(".js"))
+    for (const file of commandFiles) {
+      const command = require(path.join(cmdDir, file))
+      commands.set(command.name, command)
+    }
+    console.log("Total commands loaded:", commands.size)
+  } else {
+    console.warn("[Warning] Commands directory not found. Skipping command loading.")
+  }
+
+  // === Check and Load appstate.json ===
+  const creds = {
+    appState: JSON.parse(fs.readFileSync("appstate.json", "utf8")),
+  }
+
+  // === New Event Handler ===
+  async function eventsHandler(api, event) {
+    const eventsPath = path.join(__dirname, "..", "src", "events")
+    if (!fs.existsSync(eventsPath)) return
+
+    const eventFiles = fs.readdirSync(eventsPath)
+    for (const file of eventFiles) {
+      if (file.endsWith(".js")) {
+        const eventFunction = await require(path.join(eventsPath, file))
+        if (eventFunction.default && eventFunction.default.eventType === event.logMessageType) {
+          await eventFunction.default.run(api, event)
+        }
+      }
+    }
+  }
+
+  // === Facebook Login ===
+  login(
+    creds,
+    {
+      online: settings.fcaOptions.online,
+      updatePresence: settings.fcaOptions.updatePresence,
+      selfListen: settings.fcaOptions.selfListen,
+      randomUserAgent: false,
+    },
+    (err, api) => {
+      if (err) return console.error("[Error] Facebook Login Failed:", err)
+      (async () => {
+        const admins = []
+        for (const id of settings.adminIDs) {
+          const user = await getUser(id)
+          admins.push(user ? `${user.name} (${id})` : id)
+        }
+
+        console.log(`Bot Name: ${settings.botName}`)
+        console.log(`Prefix: ${settings.prefix}`)
+        console.log(`Admins: ${admins.join(", ")}`)
+        console.log("The bot has started listening for events...")
+      })()
+
+      const onReplyMap = new Map()
+      const onChatMap = new Map()
+      const onBootCallbacks = []
+
+      process.on("SIGINT", async () => {
+        for (const callback of onBootCallbacks) {
+          try {
+            await callback("shutdown")
+          } catch (e) {
+            console.error("[onBoot] Error:", e)
+          }
+        }
+        process.exit(0)
+      })
+
+      process.on("SIGTERM", async () => {
+        for (const callback of onBootCallbacks) {
+          try {
+            await callback("shutdown")
+          } catch (e) {
+            console.error("[onBoot] Error:", e)
+          }
+        }
+        process.exit(0)
+      })
+
+      api.listenMqtt(async (err, event) => {
+        if (err) return console.error("[Error] Failed to listen for events:", err)
+
+        const message = event
+
+        await eventsHandler(api, message)
+
+        if (
+          message.isGroup &&
+          settings.allowedGroups.length > 0 &&
+          !settings.allowedGroups.includes(message.threadID)
+        ) {
+          return api.sendMessage(getText("groupNotAllowed"), message.threadID)
+        }
+
+        // === Handle Group Data ===
+        if (message.isGroup) {
+          const group = await getGroup(message.threadID)
+          if (!group) {
+            await createGroup({
+              groupID: message.threadID,
+              name: message.threadName || "",
+              joinedAt: new Date(),
+              admins: [],
+            })
+          }
+        }
+
+        // === Handle User Data ===
+        if (message.senderID) {
+          const user = await getUser(message.senderID)
+          if (!user) {
+            await createUser({
+              userID: message.senderID,
+              name: "",
+              coins: 0,
+            })
+          } else if (user.coins === undefined) {
+            await updateUser(message.senderID, { coins: 0 })
+          }
+        }
+
+        // === Handle Reply Events ===
+        if (onReplyMap.has(message.threadID)) {
+          const onReply = onReplyMap.get(message.threadID)
+          if (onReply.type === "continue") {
+            try {
+              const command = commands.get(onReply.name)
+              if (command) {
+                await command.execute(
+                  api,
+                  message,
+                  [],
+                  { getUser, createUser, updateUser, getGroup, createGroup, updateGroup, addToHistory },
+                  settings,
+                  getText,
+                  () => {},
+                  onReply.callback,
+                  (callback) => {
+                    onBootCallbacks.push(callback)
+                  },
+                )
+              }
+            } catch (e) {
+              api.sendMessage("Error executing command.", message.threadID)
+              console.error("[Command] Error:", e)
+            }
+            return
+          }
+        }
+
+        // === Handle Commands Without Prefix ===
+        if (message.body && !message.body.startsWith(settings.prefix)) {
+          for (const [name, command] of commands) {
+            if (command.executeWithoutPrefix && typeof command.execute === "function") {
+              try {
+                await command.execute(
+                  api,
+                  message,
+                  [],
+                  { getUser, createUser, updateUser, getGroup, createGroup, updateGroup, addToHistory },
+                  settings,
+                  getText,
+                  () => {},
+                  null,
+                  (callback) => {
+                    onBootCallbacks.push(callback)
+                  },
+                )
+              } catch (e) {
+                api.sendMessage("Error executing command.", message.threadID)
+                console.error("[Command] Error:", e)
+              }
+            }
+          }
+        }
+
+        // === Handle Commands With Prefix ===
+        if (message.body && message.body.startsWith(settings.prefix)) {
+          const args = message.body.slice(settings.prefix.length).trim().split(/ +/g)
+          const commandName = args.shift().toLowerCase()
+          const command = commands.get(commandName)
+
+          if (!command) return api.sendMessage("The command you are using does not exist.", message.threadID)
+
+          try {
+            let role
+            if (settings.ownerID === message.senderID) role = 3
+            else if (settings.adminIDs.includes(message.senderID)) role = 2
+            else if (message.isGroup && message.participantIDs.includes(message.senderID)) role = 1
+            else role = 0
+
+            if (command.role > role) return api.sendMessage(getText("notAuthorized"), message.threadID)
+
+            const onReply = (onReplyData) => {
+              onReplyMap.set(message.threadID, onReplyData)
+            }
+
+            const onChat = (onChatData) => {
+              // Placeholder for chat event handling
+            }
+
+            const onBoot = (callback) => {
+              onBootCallbacks.push(callback)
+            }
+
+            await command.execute(
+              api,
+              message,
+              args,
+              { getUser, createUser, updateUser, getGroup, createGroup, updateGroup, addToHistory },
+              settings,
+              getText,
+              onChat,
+              onReply,
+              onBoot,
+            )
+          } catch (e) {
+            api.sendMessage("Error executing command.", message.threadID)
+            console.error("[Command] Error:", e)
+          }
+        }
+      })
+    },
+  )
+})()
