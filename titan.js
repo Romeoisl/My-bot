@@ -1,23 +1,3 @@
-/*
-  _____ _ _                ____        _       
- |_   _(_) |_ __ _ _ __   | __ )  ___ | |_ ____
-   | | | | __/ _` | '_ \  |  _ \ / _ \| __|_  /
-   | | | | || (_| | | | | | |_) | (_) | |_ / / 
-   |_| |_|\__\__,_|_| |_| |____/ \___/ \__/___|
-                
-*/             
-//  bot was developed by Team Titan Squad 
-/*
- credits: nethws3dev for FCA 
-          Team Titan Squad for Bot
-          Forkers for using our bot
-*/
-
-
-
-
-
-
 const fs = require("fs")
 const path = require("path")
 const { login } = require("nexus-fca")
@@ -175,7 +155,8 @@ function printBanner() {
   } else {
     console.warn("[Warning] Commands directory not found. Skipping command loading.")
   }
-
+  
+  global.commands = command;
   // === Check and Load appstate.json ===
   const creds = {
     appState: JSON.parse(fs.readFileSync("appstate.json", "utf8")),
